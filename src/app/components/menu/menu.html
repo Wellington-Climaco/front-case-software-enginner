@@ -1,0 +1,45 @@
+<div class="w-full h-max">
+  <div class="h-20">
+    @if(pessoas()){
+    <p-table
+      class="p-4"
+      [value]="pessoas()!.registros"
+      [paginator]="true"
+      [totalRecords]="pessoas()!.totalRegistros"
+      [lazy]="true"
+      (onPage)="onPageChange($event)"
+      [rows]="pessoas()!.tamanhoPagina"
+      [tableStyle]="{ 'min-width': '50rem', 'border-radius': '12px' }"
+    >
+      <ng-template #header>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>Endereco</th>
+          <th style="width: 5rem"></th>
+          <th style="width: 5rem"></th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-pessoa>
+        <tr>
+          <td>{{ pessoa.nome }}</td>
+          <td>{{ pessoa.email }}</td>
+          <td>{{ pessoa.telefone }}</td>
+          <td>{{ pessoa.endereco }}</td>
+          <td>
+            <p-button [rounded]="true" severity="contrast" label="Editar"
+              ><i class="pi pi-pencil"></i
+            ></p-button>
+          </td>
+          <td>
+            <p-button [rounded]="true" severity="contrast" label="Remover"
+              ><i class="pi pi-trash"></i
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    }
+  </div>
+</div>
