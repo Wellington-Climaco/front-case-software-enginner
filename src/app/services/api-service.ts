@@ -1,6 +1,10 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { pessoaResponse } from '../types/pessoaResponse';
+import { obterTodosResponse } from '../types/obterTodosResponse';
+import { cadastrarPessoaRequest } from '../types/cadastrarPessoaRequest';
+import { atualizarCadastroRequest } from '../types/atualizarCadastroRequest';
 
 @Injectable({
   providedIn: 'root',

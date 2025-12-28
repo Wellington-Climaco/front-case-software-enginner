@@ -1,4 +1,4 @@
-type atualizarCadastroRequest = {
+export type atualizarCadastroRequest = {
   id: string;
   primeiroNome: string;
   ultimoNome: string;

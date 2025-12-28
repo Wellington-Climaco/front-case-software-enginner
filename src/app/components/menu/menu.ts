@@ -13,6 +13,10 @@ import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { pessoaResponse } from '../../types/pessoaResponse';
+import { obterTodosResponse } from '../../types/obterTodosResponse';
+import { cadastrarPessoaRequest } from '../../types/cadastrarPessoaRequest';
+import { atualizarCadastroRequest } from '../../types/atualizarCadastroRequest';
 
 @Component({
   selector: 'app-menu',

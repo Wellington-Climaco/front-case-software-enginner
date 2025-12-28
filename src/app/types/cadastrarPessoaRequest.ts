@@ -1,4 +1,4 @@
-type cadastrarPessoaRequest = {
+export type cadastrarPessoaRequest = {
   primeiroNome: string;
   ultimoNome: string;
   endereco: string;

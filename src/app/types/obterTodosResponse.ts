@@ -1,4 +1,6 @@
-type obterTodosResponse = {
+import { pessoaResponse } from './pessoaResponse';
+
+export type obterTodosResponse = {
   paginaAtual: number;
   tamanhoPagina: number;
   totalPaginas: number;
@@ -6,13 +8,4 @@ type obterTodosResponse = {
   possuiPaginaAnterior: boolean;
   possuiPaginaSeguinte: boolean;
   registros: pessoaResponse[];
-};
-
-type pessoaResponse = {
-  id: string;
-  nome: string;
-  email: string;
-  telefone: string;
-  endereco: string;
-  dataNascimento: string;
 };
