@@ -1,8 +1,16 @@
 <div class="w-full h-max">
-  <div class="h-20">
+  <div class="px-4 py-10 flex flex-col justify-start">
+    <div class="flex justify-end mb-2">
+      <p-button
+        (click)="abrirDialogCriarCadastro()"
+        class=""
+        severity="info"
+        label="Cadastrar Pessoa"
+        ><i class="pi pi-plus"></i
+      ></p-button>
+    </div>
     @if(pessoas()){
     <p-table
-      class="p-4"
       [value]="pessoas()!.registros"
       [paginator]="true"
       [totalRecords]="pessoas()!.totalRegistros"
@@ -28,12 +36,20 @@
           <td>{{ pessoa.telefone }}</td>
           <td>{{ pessoa.endereco }}</td>
           <td>
-            <p-button [rounded]="true" severity="contrast" label="Editar"
+            <p-button
+              (click)="abrirDialogAtualizarCadastro(pessoa)"
+              [rounded]="true"
+              severity="contrast"
+              label="Editar"
               ><i class="pi pi-pencil"></i
             ></p-button>
           </td>
           <td>
-            <p-button [rounded]="true" severity="contrast" label="Remover"
+            <p-button
+              (click)="removerRegistro(pessoa.id)"
+              [rounded]="true"
+              severity="contrast"
+              label="Remover"
               ><i class="pi pi-trash"></i
             ></p-button>
           </td>
@@ -43,3 +59,139 @@
     }
   </div>
 </div>
+<p-toast position="top-left"></p-toast>
+
+<p-dialog
+  header="Cadastrar Pessoa"
+  [modal]="true"
+  [(visible)]="dialogCriarCadastroVisivel"
+  [style]="{ width: '25rem' }"
+>
+  <form [formGroup]="formCadastrarPessoa">
+    <div class="flex items-center gap-4 mb-4">
+      <label for="username" class="font-semibold w-24">Primeiro nome</label>
+      <input
+        pInputText
+        formControlName="primeiroNome"
+        id="username"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+      <label for="username" class="font-semibold w-24">Último nome</label>
+      <input
+        pInputText
+        formControlName="ultimoNome"
+        id="username"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+      <label for="email" class="font-semibold w-24">Email</label>
+      <input pInputText formControlName="email" id="email" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+      <label for="email" class="font-semibold w-24">Endereço</label>
+      <input
+        pInputText
+        formControlName="endereco"
+        id="email"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+      <label for="email" class="font-semibold w-24">Telefone</label>
+      <input
+        pInputText
+        formControlName="telefone"
+        id="email"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+      <label for="email" class="font-semibold w-24">Data de nascimento</label>
+      <p-datepicker
+        showIcon="true"
+        appendTo="body"
+        formControlName="dataNascimento"
+        dateFormat="yy-mm-dd"
+      />
+    </div>
+    <div class="flex justify-end gap-2">
+      <p-button
+        label="Cancelar"
+        severity="secondary"
+        (click)="dialogCriarCadastroVisivel = false"
+      />
+      <p-button label="Cadastrar" severity="info" (click)="cadastrarPessoa()" />
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog
+  header="Atualizar cadastro"
+  [modal]="true"
+  [(visible)]="dialogAtualizarCadastroVisivel"
+  [style]="{ width: '25rem' }"
+>
+  @if(dialogAtualizarCadastroVisivel){
+  <form [formGroup]="formAtualizarCadastro">
+    <div class="flex items-center gap-4 mb-4">
+      <label for="username" class="font-semibold w-24">Primeiro nome</label>
+      <input
+        pInputText
+        formControlName="primeiroNome"
+        id="username"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+      <label for="username" class="font-semibold w-24">Último nome</label>
+      <input
+        pInputText
+        formControlName="ultimoNome"
+        id="username"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+      <label for="email" class="font-semibold w-24">Email</label>
+      <input pInputText formControlName="email" id="email" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+      <label for="email" class="font-semibold w-24">Endereço</label>
+      <input
+        pInputText
+        formControlName="endereco"
+        id="email"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+      <label for="email" class="font-semibold w-24">Telefone</label>
+      <input
+        pInputText
+        formControlName="telefone"
+        id="email"
+        class="flex-auto"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex justify-end gap-2">
+      <p-button
+        label="Cancelar"
+        severity="secondary"
+        (click)="dialogAtualizarCadastroVisivel = false"
+      />
+      <p-button label="Atualizar" severity="info" (click)="atualizarCadastro()" />
+    </div>
+  </form>
+  }
+</p-dialog>
