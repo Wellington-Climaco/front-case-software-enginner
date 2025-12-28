@@ -46,7 +46,7 @@
           </td>
           <td>
             <p-button
-              (click)="removerRegistro(pessoa.id)"
+              (click)="confirmarRemocao($event, pessoa.id)"
               [rounded]="true"
               severity="contrast"
               label="Remover"
@@ -195,3 +195,5 @@
   </form>
   }
 </p-dialog>
+
+<p-confirmpopup></p-confirmpopup>

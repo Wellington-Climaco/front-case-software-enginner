@@ -3,7 +3,7 @@ import { TableModule } from 'primeng/table';
 import { ApiService } from '../../services/api-service';
 import { CommonModule } from '@angular/common';
 import { Button } from 'primeng/button';
-import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { DatePickerModule, DatePicker } from 'primeng/datepicker';
@@ -12,6 +12,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SkeletonModule } from 'primeng/skeleton';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @Component({
   selector: 'app-menu',
@@ -27,8 +28,9 @@ import { SkeletonModule } from 'primeng/skeleton';
     DatePicker,
     ReactiveFormsModule,
     SkeletonModule,
+    ConfirmPopupModule,
   ],
-  providers: [MessageService, FormBuilder],
+  providers: [MessageService, FormBuilder, ConfirmationService],
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
@@ -44,7 +46,8 @@ export class Menu implements OnInit {
   constructor(
     private apiService: ApiService,
     private messageService: MessageService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -79,6 +82,23 @@ export class Menu implements OnInit {
         }
 
         this.setarToast('error', 'Erro', err.error);
+      },
+    });
+  }
+  confirmarRemocao(event: Event, id: string) {
+    this.confirmationService.confirm({
+      target: event.target as HTMLElement,
+      message: 'Deseja realmente remover este registro?',
+      icon: 'pi pi-info-circle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      acceptButtonStyleClass: 'p-button-danger',
+
+      accept: () => {
+        this.removerRegistro(id);
+      },
+      reject: () => {
+        this.setarToast('info', '', 'Você rejeitou a remoção desse item.');
       },
     });
   }
